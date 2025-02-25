@@ -1,5 +1,8 @@
 export default function QueryProcessor(query: string): string {
-  if (query.toLowerCase().includes("shakespeare")) {
+  query = query.toLowerCase(); // Normalize the query to lowercase for consistent processing
+
+  // Handle Shakespeare-related query
+  if (query.includes("shakespeare")) {
     return (
       "William Shakespeare (26 April 1564 - 23 April 1616) was an " +
       "English poet, playwright, and actor, widely regarded as the greatest " +
@@ -7,27 +10,34 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  if (query.toLowerCase().includes("name")) {
-    return "Rohan";
+  // Respond with a hardcoded name for queries including "name"
+  if (query.includes("name")) {
+    return "Riya Kinny";
   }
 
-  if (query.toLowerCase().includes("andrew id")) {
+  // Respond with a hardcoded Andrew ID for relevant queries
+  if (query.includes("andrew id")) {
     return "rkinny";
   }
 
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 29, 63, 9?")){
-    return "63";
+  // Dynamic processing for finding the largest number
+  if (query.includes("which of the following numbers is the largest")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers) {
+      const maxNumber = Math.max(...numbers.map(Number));
+      return maxNumber.toString();
+    }
   }
 
-  if (query.toLowerCase().includes("What is 12 plus 71?")){
-    return "83";
-  }
-  if (query.toLowerCase().includes("What is 91 + 73?")){
-    return "164";
+  // Dynamic addition processing
+  if (query.includes("what is") && query.includes("+")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers) {
+      const sum = numbers.reduce((acc, num) => acc + Number(num), 0);
+      return sum.toString();
+    }
   }
 
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 3, 84, 64?")){
-    return "84";
-  }
-  return "";
+  // Default response if no known query patterns match
+  return "Query not recognized";
 }
