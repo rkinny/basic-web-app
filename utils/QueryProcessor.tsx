@@ -61,6 +61,34 @@ export default function QueryProcessor(query: string): string {
       return "None";
     }
   }
+  // Check if the number is prime
+function isPrime(n) {
+  if (n <= 1) return false;
+  if (n <= 3) return true;
+  if (n % 2 === 0 || n % 3 === 0) return false;
+  for (let i = 5; i * i <= n; i += 6) {
+    if (n % i === 0 || n % (i + 2) === 0) return false;
+  }
+  return true;
+}
+
+// Process prime number query
+if (query.includes("which of the following numbers are primes")) {
+  const numbers = query.match(/\d+/g);
+  if (numbers) {
+    const primeNumbers = numbers.filter(num => isPrime(Number(num)));
+    return primeNumbers.length > 0 ? primeNumbers.join(", ") : "None are prime";
+  }
+}
+
+// Process subtraction query
+if (query.includes("what is") && query.includes("minus")) {
+  const numbers = query.match(/\d+/g);
+  if (numbers && numbers.length === 2) {
+    const result = Number(numbers[0]) - Number(numbers[1]);
+    return result.toString();
+  }
+}
 
   // Default response if no known query patterns match
   return "Query not recognized";
