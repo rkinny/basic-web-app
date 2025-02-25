@@ -61,8 +61,8 @@ export default function QueryProcessor(query: string): string {
       return "None";
     }
   }
-  // Check if the number is prime
-function isPrime(n) {
+// Helper function to check if a number is prime
+function isPrime(n: number): boolean {
   if (n <= 1) return false;
   if (n <= 3) return true;
   if (n % 2 === 0 || n % 3 === 0) return false;
@@ -71,6 +71,7 @@ function isPrime(n) {
   }
   return true;
 }
+
 
 // Process prime number query
 if (query.includes("which of the following numbers are primes")) {
