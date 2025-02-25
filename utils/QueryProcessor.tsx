@@ -47,6 +47,21 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+  // Check if the number is both a square and a cube (sixth power)
+  if (query.includes("which of the following numbers is both a square and a cube")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers) {
+      const sixthPowers = numbers.filter(num => {
+        let sixthRoot = Math.pow(Number(num), 1/6);
+        return sixthRoot === Math.floor(sixthRoot); // Check if the sixth root is an integer
+      });
+      if (sixthPowers.length > 0) {
+        return sixthPowers.join(", "); // Return all valid numbers
+      }
+      return "None";
+    }
+  }
+
   // Default response if no known query patterns match
   return "Query not recognized";
 }
