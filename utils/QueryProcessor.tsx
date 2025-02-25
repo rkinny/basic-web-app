@@ -30,7 +30,7 @@ export default function QueryProcessor(query: string): string {
   }
 
   // Dynamic addition processing
-  if (query.includes("what is") && query.includes("+")) {
+  if (query.includes("what is") && query.includes("plus")) {
     const numbers = query.match(/\d+/g);
     if (numbers) {
       const sum = numbers.reduce((acc, num) => acc + Number(num), 0);
