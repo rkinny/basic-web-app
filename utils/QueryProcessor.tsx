@@ -12,7 +12,7 @@ export default function QueryProcessor(query: string): string {
 
   // Respond with a hardcoded name for queries including "name"
   if (query.includes("name")) {
-    return "Riya Kinny";
+    return "Rohan";
   }
 
   // Respond with a hardcoded Andrew ID for relevant queries
@@ -30,11 +30,20 @@ export default function QueryProcessor(query: string): string {
   }
 
   // Dynamic addition processing
-  if (query.includes("what is") && query.includes("plus")) {
+  if (query.includes("what is") && query.includes("+")) {
     const numbers = query.match(/\d+/g);
     if (numbers) {
       const sum = numbers.reduce((acc, num) => acc + Number(num), 0);
       return sum.toString();
+    }
+  }
+
+  // Dynamic multiplication processing
+  if (query.includes("what is") && query.includes("multiplied by")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length === 2) { // Ensure two numbers are present
+      const product = numbers.reduce((acc, num) => acc * Number(num), 1);
+      return product.toString();
     }
   }
 
